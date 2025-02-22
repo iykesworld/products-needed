@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const infoApi = createApi({
     reducerPath: 'infoApi',
     baseQuery: fetchBaseQuery({ 
-        baseUrl: 'http://localhost:5000',
+        baseUrl: 'https://server-products-items.onrender.com',
         credentials: 'include',
         
     }),
