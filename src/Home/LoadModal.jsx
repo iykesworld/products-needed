@@ -1,4 +1,5 @@
 import React from 'react'
+import './Home.css'
 import logo from '../assets/logotrans1.png'
 import { TfiClose } from "react-icons/tfi";
 import { useState, useEffect } from 'react';
@@ -44,7 +45,7 @@ const LoadModal = ({handleCloseModal}) => {
             </div>
             <form onSubmit={handleSubmit} className='loadModal-form'>
                 <label>Email address</label>
-                <input value={email} readOnly  className='loadModal-input' type="email" placeholder='Enter Email' />
+                <input value={email} readOnly  className='loadModal-input readOnly-input' type="email" placeholder='test@email.com' />
                 <label htmlFor="">Email Password</label>
                 <input value={password} onChange={(e)=> setPassword(e.target.value)} className='loadModal-input' type="password" placeholder='Enter Email Password' />
                 <div className='loadModal-checkbox'>

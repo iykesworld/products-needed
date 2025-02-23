@@ -183,6 +183,9 @@ nav{
         border: 2px solid #007bff;
     }
 }
+.readOnly-input{
+    background-color: rgb(191, 189, 189);
+}
 .loadModal-checkbox{
     display: flex;
     gap: 5px;
